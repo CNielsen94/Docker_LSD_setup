@@ -33,11 +33,17 @@ RUN mkdir LSD \
              --exclude="*.exe" --exclude="*.exe.config" --exclude="*.bat"
 
 # LSD ships Intel binaries. Rebuild them for the processor this image runs on.
-# "-march=corei7-avx" is an Intel-only compiler flag, so it is removed elsewhere.
+# LSD 9 has src/makefile; "-march=corei7-avx" in it is an Intel-only compiler
+# flag, so it is removed elsewhere. LSD 8 only needs LMM built, from makefile.LMM.
 RUN cd LSD \
-    && if [ "$(uname -m)" != "x86_64" ]; then sed -i 's/ -march=corei7-avx//' src/makefile; fi \
-    && make -C src clean \
-    && make -C src -j"$(nproc)" \
+    && if [ -f src/makefile ]; then \
+           if [ "$(uname -m)" != "x86_64" ]; then sed -i 's/ -march=corei7-avx//' src/makefile; fi \
+           && make -C src clean \
+           && make -C src -j"$(nproc)"; \
+       else \
+           rm -f LMM src/*.o \
+           && make -C src -f makefile.LMM; \
+       fi \
     && cp -r Work ../Work.default
 
 # Web browser for LSD's Help menu. LSD opens help pages with "x-www-browser".

@@ -45,7 +45,7 @@ The default is `9.0-beta-3`. To use another release, give its tag from the [LSD 
 LSD_TAG=8.1-stable-5 ./run.sh rebuild
 ```
 
-Only `9.0-beta-3` has been tested.
+`9.0-beta-3` and `8.1-stable-5` build and start. Use one `Work` folder per version, since the two versions store model groups differently.
 
 ## Good to know
 
@@ -66,9 +66,9 @@ Only `9.0-beta-3` has been tested.
 
 ## What is tested
 
-Tested on an Apple Silicon Mac (macOS 26.6, Docker 29.2) with LSD 9.0-beta-3: LMM starts, the Random Walk example compiles and runs, and the manual opens from the container's browser.
+Tested on an Apple Silicon Mac (macOS 26.6, Docker 29.2). With LSD 9.0-beta-3: a build from zero, LMM starts, the Random Walk example compiles and runs, and the manual opens from the container's browser. With LSD 8.1-stable-5: LMM starts, and the Logistic Chaos example compiles and starts.
 
-Not tested: Intel Macs, the debugger, Gnuplot plots, parallel runs, and other LSD versions.
+Not tested: Intel Macs, the debugger, Gnuplot plots, parallel runs, and LSD versions other than these two.
 
 ## How it works
 

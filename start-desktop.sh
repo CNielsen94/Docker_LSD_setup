@@ -5,7 +5,7 @@ export DISPLAY=:1
 LSDROOT="$HOME/LSD"
 
 # The Work folder is shared with the Mac. Fill it with LSD's defaults the first time.
-if [ ! -f "$LSDROOT/Work/group.cfg" ]; then
+if [ -z "$(ls -A "$LSDROOT/Work")" ]; then
     cp -rn "$HOME/Work.default/." "$LSDROOT/Work/"
 fi
 

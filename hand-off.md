@@ -77,9 +77,8 @@ All on the machine described above, with LSD 9.0-beta-3.
 
 | Item | Note |
 |---|---|
-| Build without cache | Every build after the first reused cached layers |
 | Intel Mac or any x86_64 host | The patch step is skipped there. `-march=corei7-avx` needs AVX, which should be present on Intel Macs from 2011 onwards |
-| LSD 8.1-stable-5 or other tags | `LSD_TAG` is passed through, but folder names, makefiles and the patch may differ between versions |
+| LSD tags other than 9.0-beta-3 and 8.1-stable-5 | The build step handles the LSD 9 layout (`src/makefile`) and the LSD 8 layout (`src/makefile.LMM`) |
 | Help menu clicked inside LMM | Only the command behind it was tested |
 | gdb, Gnuplot, multitail, parallel runs, Python interface | Packages are installed, nothing was run |
 | Linux hosts | `run.sh` falls back to `xdg-open`. Bind mount ownership may need attention, since the container user has uid 1001 and Docker on Linux does not translate ownership the way Docker Desktop does |
@@ -117,13 +116,10 @@ The xkbcomp warnings about unresolved keysyms in `docker logs` are harmless.
 
 ## Open tasks
 
-1. Build from zero with `docker build --no-cache` and confirm a first run works for a new user.
-2. Build `LSD_TAG=8.1-stable-5` on ARM64 and adjust the patch step if it fails.
-3. Test on an Intel Mac.
-4. Click through Help in LMM and confirm NetSurf opens from the menu.
-5. Test gdb and Gnuplot from inside LSD.
-6. Choose a licence for the scripts in this repository.
-7. Consider publishing a prebuilt image so users skip the build. LSD is under the GPL, so a published image has to meet its terms for distributing binaries.
+1. Test on an Intel Mac.
+2. Click through Help in LMM and confirm NetSurf opens from the menu.
+3. Test gdb and Gnuplot from inside LSD.
+4. Consider publishing a prebuilt image so users skip the build. LSD is under the GPL, so a published image has to meet its terms for distributing binaries.
 
 ## Rules for changes
 
