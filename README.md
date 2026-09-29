@@ -39,10 +39,10 @@ Everything else lives inside the container. Changes to the example models surviv
 
 ## Another LSD version
 
-The default is `9.0-beta-3`. To use another release, give its tag from the [LSD releases page](https://github.com/marcov64/Lsd/releases):
+The default is `8.1-stable-5`, the latest stable release. To use another release, give its tag from the [LSD releases page](https://github.com/marcov64/Lsd/releases):
 
 ```bash
-LSD_TAG=8.1-stable-5 ./run.sh rebuild
+LSD_TAG=9.0-beta-3 ./run.sh rebuild
 ```
 
 `9.0-beta-3` and `8.1-stable-5` build and start. Use one `Work` folder per version, since the two versions store model groups differently.

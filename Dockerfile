@@ -3,7 +3,7 @@
 
 FROM ubuntu:24.04
 
-ARG LSD_TAG=9.0-beta-3
+ARG LSD_TAG=8.1-stable-5
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Line 1-2: packages the LSD readme lists for Debian/Ubuntu (section 4.2).

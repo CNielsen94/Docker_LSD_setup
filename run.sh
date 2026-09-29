@@ -6,7 +6,7 @@
 #   ./run.sh uninstall  remove the container and the image (the Work folder is kept)
 #
 # Optional settings, given in front of the command:
-#   LSD_TAG=8.1-stable-5 ./run.sh rebuild   use another LSD release
+#   LSD_TAG=9.0-beta-3 ./run.sh rebuild    use another LSD release
 #   LSD_PORT=6081 ./run.sh                  use another port
 #   LSD_NAME=lsd2 ./run.sh                  use another container name
 #   LSD_NO_OPEN=1 ./run.sh                  do not open the browser
@@ -14,7 +14,7 @@
 set -e
 cd "$(dirname "$0")"
 
-LSD_TAG="${LSD_TAG:-9.0-beta-3}"
+LSD_TAG="${LSD_TAG:-8.1-stable-5}"
 PORT="${LSD_PORT:-6080}"
 NAME="${LSD_NAME:-lsd}"
 IMAGE="lsd-desktop:$LSD_TAG"
