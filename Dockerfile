@@ -51,6 +51,10 @@ USER root
 RUN apt-get update && apt-get install -y --no-install-recommends netsurf-gtk \
     && rm -rf /var/lib/apt/lists/* \
     && update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/netsurf-gtk 50
+
+# Start page: http://localhost:6080 forwards to the LSD desktop.
+RUN echo '<meta http-equiv="refresh" content="0; url=vnc.html?autoconnect=1&resize=remote">' \
+    > /usr/share/novnc/index.html
 USER lsd
 
 COPY --chown=lsd:lsd --chmod=755 start-desktop.sh /home/lsd/start-desktop.sh

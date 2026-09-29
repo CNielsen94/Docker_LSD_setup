@@ -22,7 +22,7 @@ Open Terminal in this folder and run:
 ./run.sh
 ```
 
-The first start builds the image and takes 5 to 10 minutes. After that it starts in a few seconds. LSD opens in your browser at <http://localhost:6080/vnc.html?autoconnect=1&resize=remote>.
+The first start builds the image and takes 5 to 10 minutes. After that it starts in a few seconds. LSD opens in your browser at <http://localhost:6080>.
 
 | Command | What it does |
 |---|---|

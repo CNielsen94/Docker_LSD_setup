@@ -36,7 +36,7 @@ From the repository folder:
 
 The first run builds the image, which takes a few minutes. Then LSD is at:
 
-<http://localhost:6080/vnc.html?autoconnect=1&resize=remote>
+<http://localhost:6080>
 
 ## Check that it works
 

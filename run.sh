@@ -18,7 +18,7 @@ LSD_TAG="${LSD_TAG:-8.1-stable-5}"
 PORT="${LSD_PORT:-6080}"
 NAME="${LSD_NAME:-lsd}"
 IMAGE="lsd-desktop:$LSD_TAG"
-URL="http://localhost:$PORT/vnc.html?autoconnect=1&resize=remote"
+URL="http://localhost:$PORT"
 
 if ! command -v docker >/dev/null 2>&1; then
     echo "Docker is not installed. Get Docker Desktop from https://www.docker.com/products/docker-desktop/"
