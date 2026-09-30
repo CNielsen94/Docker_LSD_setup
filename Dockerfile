@@ -46,6 +46,10 @@ RUN cd LSD \
        fi \
     && cp -r Work ../Work.default
 
+# LSD shifts its windows 67 pixels up on Linux, to allow for a desktop top bar.
+# This desktop has none, so the shift would hide the title bar and menu.
+RUN sed -i 's/^set corrYlinux\([[:space:]]*\)-67/set corrYlinux\10/' LSD/src/defaults.tcl
+
 # Web browser for LSD's Help menu. LSD opens help pages with "x-www-browser".
 USER root
 RUN apt-get update && apt-get install -y --no-install-recommends netsurf-gtk \
