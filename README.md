@@ -52,7 +52,7 @@ LSD_TAG=9.0-beta-3 ./run.sh rebuild
 - **Copy and paste** between your computer and LSD goes through the clipboard button in the panel on the left edge of the browser tab.
 - **One viewer at a time.** The desktop resizes to the browser window that views it. A second tab or window on the same address makes it jump between sizes.
 - **No password.** The desktop is only reachable from your own computer. Do not change the `127.0.0.1` in `run.sh` on a shared network.
-- **The Help menu** opens in NetSurf, a small browser inside the container.
+- **The Help menu** opens in NetSurf, a small browser inside the container. Files you download there are saved to the `Work` folder.
 
 ## Troubleshooting
 

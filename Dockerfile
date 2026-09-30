@@ -61,6 +61,10 @@ RUN echo '<meta http-equiv="refresh" content="0; url=vnc.html?autoconnect=1&resi
     > /usr/share/novnc/index.html
 USER lsd
 
+# The browser saves downloads to the Work folder, which is shared with the host.
+RUN mkdir -p .config/netsurf \
+    && echo 'downloads_directory:/home/lsd/LSD/Work' > .config/netsurf/Choices
+
 COPY --chown=lsd:lsd --chmod=755 start-desktop.sh /home/lsd/start-desktop.sh
 
 EXPOSE 6080
