@@ -51,7 +51,7 @@ Keep your own scripts and simulation results in the `Work` folder. R sees it as 
 
 ## Working with LSD through an AI agent
 
-[LSD-MCP](https://github.com/CNielsen94/LSD-MCP) is an MCP server that lets an agent such as Claude work with the LSD in this container: inspect and edit models, compile and run them, and run sensitivity analyses with LSD's own design code and R packages. Its Docker backend uses the running container from this repository and needs nothing else installed. Models the agent makes are saved in the `Work` folder.
+[LSD-MCP](https://github.com/CNielsen94/LSD-MCP) is an MCP server that lets an agent such as Claude work with the LSD in this container: inspect and edit models, compile and run them, and run sensitivity analyses with LSD's own design code and R packages. Its Docker backend uses the running container from this repository; besides Docker it needs only `uv` on your computer. Models the agent makes are saved in the `Work` folder.
 
 ## Another LSD version
 
