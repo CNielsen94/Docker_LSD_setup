@@ -11,7 +11,7 @@ This setup uses the Linux version of LSD, which is supported, and compiles it fo
 ## Requirements
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/), installed and running
-- About 2 GB of free disk space
+- About 3 GB of free disk space
 - An internet connection for the first start
 
 ## Start
@@ -22,7 +22,7 @@ Open Terminal in this folder and run:
 ./run.sh
 ```
 
-The first start builds the image and takes 5 to 10 minutes. After that it starts in a few seconds. LSD opens in your browser at <http://localhost:6080>.
+The first start builds the image and takes 10 to 15 minutes. After that it starts in a few seconds. LSD opens in your browser at <http://localhost:6080>.
 
 | Command | What it does |
 |---|---|
@@ -36,6 +36,18 @@ The first start builds the image and takes 5 to 10 minutes. After that it starts
 Save your models in the group **Work in Progress**. That group is the `Work` folder next to this file, so it is stored on your own computer and survives everything, including `uninstall`.
 
 Everything else lives inside the container. Changes to the example models survive `stop` and start, but `rebuild` and `uninstall` delete them. To keep a changed example, copy it into Work in Progress with the copy and paste buttons in the LSD Model Browser.
+
+## Sensitivity analysis in R
+
+The image includes R with LSD's own R packages (LSDinterface, LSDsensitivity and LSDirf), installed from the `Rpkg` folder of the LSD release. LSD's example scripts are in `/home/lsd/LSD/Rpkg/Example` inside the container.
+
+Start R in the container from Terminal:
+
+```bash
+docker exec -it lsd R
+```
+
+Keep your own scripts and simulation results in the `Work` folder. R sees it as `/home/lsd/LSD/Work`.
 
 ## Another LSD version
 
@@ -66,15 +78,15 @@ LSD_TAG=9.0-beta-3 ./run.sh rebuild
 
 ## What is tested
 
-Tested on an Apple Silicon Mac (macOS 26.6, Docker 29.2). With LSD 9.0-beta-3: a build from zero, LMM starts, the Random Walk example compiles and runs, and the manual opens from the container's browser. With LSD 8.1-stable-5: LMM starts, and the Logistic Chaos example compiles and starts.
+Tested on an Apple Silicon Mac (macOS 26.6, Docker 29.2). With LSD 9.0-beta-3: a build from zero, LMM starts, the Random Walk example compiles and runs, and the manual opens from the container's browser. With LSD 8.1-stable-5: LMM starts, and the Logistic Chaos example compiles and starts. With R in the image (8.1-stable-5): the Coordination example compiles and runs, and an elementary effects analysis and a Kriging and Sobol analysis in R return the known values of a linear test model.
 
-Not tested: Intel Macs, the debugger, Gnuplot plots, parallel runs, and LSD versions other than these two.
+Not tested: Intel Macs, the debugger, Gnuplot plots, parallel runs, a build of 9.0-beta-3 with R included, and LSD versions other than these two.
 
 ## How it works
 
 | File | Purpose |
 |---|---|
-| `Dockerfile` | Ubuntu 24.04 with the packages from the LSD readme, the LSD source from the official release, and a browser desktop (TigerVNC, Openbox, noVNC) |
+| `Dockerfile` | Ubuntu 24.04 with the packages from the LSD readme, the LSD source from the official release, a browser desktop (TigerVNC, Openbox, noVNC), and R with LSD's R packages |
 | `start-desktop.sh` | Runs inside the container: starts the desktop and LMM |
 | `run.sh` | Runs on your computer: builds, starts and stops the container |
 

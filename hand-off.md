@@ -44,9 +44,10 @@ The first run builds the image, which takes a few minutes. Then LSD is at:
 docker ps --filter name=lsd
 docker exec lsd pgrep -l LMM
 curl -s -o /dev/null -w "%{http_code}\n" http://localhost:6080/vnc.html
+docker exec lsd Rscript -e 'packageVersion("LSDsensitivity")'
 ```
 
-Expected: the container is up, a line with `LMM`, and `200`.
+Expected: the container is up, a line with `LMM`, `200`, and the version of LSD's R package.
 
 ## Commands
 

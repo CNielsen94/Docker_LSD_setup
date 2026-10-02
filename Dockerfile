@@ -27,7 +27,6 @@ RUN mkdir LSD \
              --exclude="Lsd-${LSD_TAG}/gnu" \
              --exclude="Lsd-${LSD_TAG}/installer" \
              --exclude="Lsd-${LSD_TAG}/lwi" \
-             --exclude="Lsd-${LSD_TAG}/Rpkg" \
              --exclude="Lsd-${LSD_TAG}/LMM.app" \
              --exclude="Lsd-${LSD_TAG}/LSD.app" \
              --exclude="*.exe" --exclude="*.exe.config" --exclude="*.bat"
@@ -59,6 +58,29 @@ RUN apt-get update && apt-get install -y --no-install-recommends netsurf-gtk \
 # Start page: http://localhost:6080 forwards to the LSD desktop.
 RUN echo '<meta http-equiv="refresh" content="0; url=vnc.html?autoconnect=1&resize=remote">' \
     > /usr/share/novnc/index.html
+
+# R with LSD's own packages for sensitivity analysis, installed from LSD's Rpkg
+# folder. The packages they depend on come from the CRAN snapshot of
+# 15 December 2025, prebuilt for Ubuntu 24.04: LSDinterface 1.2.2 (LSD 8.1)
+# needs TSdist, which left CRAN in January 2026. parallelDist and XML are for
+# the package versions in LSD 9.0. rgl (loaded through TSdist) needs no display.
+# r-recommended: Matrix and MASS for Ubuntu's R 4.3; the snapshot's own versions
+# need R 4.4, so install.packages() skips them.
+ENV RGL_USE_NULL=TRUE
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        r-base-core r-recommended libgl1 libglu1-mesa libxml2 libcurl4 libgomp1 \
+    && rm -rf /var/lib/apt/lists/*
+RUN Rscript -e 'options(repos = c(CRAN = "https://p3m.dev/cran/__linux__/noble/2025-12-15"), \
+            HTTPUserAgent = sprintf("R/%s R (%s)", getRversion(), \
+                paste(getRversion(), R.version$platform, R.version$arch, R.version$os))); \
+        pkgs <- c("abind", "boot", "car", "DiceKriging", "diptest", "kSamples", "lawstat", \
+                  "randtoolbox", "rgenoud", "sensitivity", "tseries", "TSdist", \
+                  "gplots", "digest", "partykit", "randomForest", "parallelDist", "XML"); \
+        install.packages(pkgs); \
+        for (p in rownames(installed.packages())) stopifnot(requireNamespace(p, quietly = TRUE))' \
+    && R CMD INSTALL LSD/Rpkg/LSDinterface_*.tar.gz LSD/Rpkg/LSDsensitivity_*.tar.gz \
+                     LSD/Rpkg/LSDirf_*.tar.gz \
+    && Rscript -e 'library(LSDsensitivity); library(LSDirf)'
 USER lsd
 
 # The browser saves downloads to the Work folder, which is shared with the host.
